@@ -1,4 +1,4 @@
-module github.com/aramonc/logger
+module github.com/aramonc/loggergo
 
 go 1.14
 

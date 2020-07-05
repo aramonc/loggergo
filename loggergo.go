@@ -1,4 +1,4 @@
-package logger
+package loggergo
 
 import (
 	"github.com/google/uuid"

@@ -1,4 +1,4 @@
-package logger_test
+package loggergo_test
 
 import (
 	"math/rand"
@@ -8,19 +8,19 @@ import (
 	"github.com/sirupsen/logrus/hooks/test"
 	"github.com/stretchr/testify/assert"
 
-	"github.com/aramonc/logger"
+	"github.com/aramonc/loggergo"
 )
 
 func TestWithJSONFormatterSetsTheJSONFormatter(t *testing.T) {
 	l := logrus.New()
-	ln := logger.WithJSONFormatter(l)
+	ln := loggergo.WithJSONFormatter(l)
 
 	assert.IsType(t, &logrus.JSONFormatter{}, ln.Formatter)
 }
 
 func TestWithLevelSetsCorrectLevel(t *testing.T) {
 	l := logrus.New()
-	ln := logger.WithLevel(l, "debug")
+	ln := loggergo.WithLevel(l, "debug")
 
 	assert.True(t, ln.IsLevelEnabled(logrus.DebugLevel))
 }
@@ -30,7 +30,7 @@ func TestWithLevelRevertsToPreviousLevelOnError(t *testing.T) {
 
 	l.SetLevel(logrus.FatalLevel)
 
-	ln := logger.WithLevel(l, "dbug")
+	ln := loggergo.WithLevel(l, "dbug")
 
 	assert.False(t, ln.IsLevelEnabled(logrus.DebugLevel))
 	assert.True(t, ln.IsLevelEnabled(logrus.WarnLevel))
@@ -90,7 +90,7 @@ func TestWithTraceSetsIDFields(t *testing.T) {
 	for _, s := range scenarios {
 		t.Run(s.description, func(t *testing.T) {
 			l, h := test.NewNullLogger()
-			ln := logger.WithTrace(l, string(s.args.trace), string(s.args.span))
+			ln := loggergo.WithTrace(l, string(s.args.trace), string(s.args.span))
 
 			entry := ln.(*logrus.Entry)
 
